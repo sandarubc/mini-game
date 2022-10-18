@@ -41,6 +41,7 @@ body {
   transform: translateX(-50%);
   border: 2px solid white;
   background-color: black;
+  box-shadow: -6px -4px 9px 8px;
 }
 #title h1 {
   padding: 10px;
