@@ -15,7 +15,7 @@
 
 body {
   height: 100vh;
-  background-image: url(../image/background.png);
+  background-image: url(../image/background.jpg);
   overflow: hidden;
 }
 
@@ -55,12 +55,44 @@ body {
   padding: 10px 5px;
 }
 
-#msg {
+#outmsg {
   display: none;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 50px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(255, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
-#msg.display {
+#wonmsg {
+  pointer-events: none;
+  display: none;
+  font-size: 50px;
+  font-weight: bold;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 20px 50px;
+  background-color: rgba(255, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+}
+
+#wonmsg.display {
   display: block;
+}
+
+#outmsg.display {
+  display: block;
+}
+
+.obstacle {
+  background-image: url(../image/bomb-tnt.png);
+  background-size: contain;
+  border: 1px solid black;
 }
 
 /*# sourceMappingURL=style.css.map */

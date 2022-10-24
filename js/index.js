@@ -8,6 +8,7 @@ let dy=2;
 let position=0;
 let accelaration=0.3;
 let index=1;
+let elements=document.querySelectorAll(".obstacle");
 
 const ObstacleWidth=50;
 
@@ -18,17 +19,17 @@ class Obstacle{
     constructor(){
         
         while((this.#left<player.offsetWidth)||(this.#left>(innerWidth-player.offsetWidth-ObstacleWidth)))this.#left=Math.random()*innerWidth;
-        console.log(this.#left>(innerWidth-player.offsetLeft))
         if(this.#left>=ObstacleWidth){
             const element=document.createElement("div");
             element.classList.add("obstacle");
             element.style.position="absolute";
             element.style.width=`${ObstacleWidth}px`;
             element.style.height="50px";
-            element.style.backgroundColor=`rgb(${256*Math.random()},${256*Math.random()},${256*Math.random()})`
             element.style.bottom=`${ground.offsetHeight}px`
             element.style.left=`${this.#left}px`;
             document.querySelector("body").append(element);
+
+            elements=document.querySelectorAll(".obstacle");
 
         }
     }
@@ -62,7 +63,7 @@ addEventListener("keyup",({key})=>{
 })
 
 addEventListener("keypress",({key})=>{
-    if(key===" "){
+    if(key===" "&&player.offsetTop>=innerHeight*50/100){
         dy=-10;
         accelaration=0.3;
     }
@@ -81,7 +82,7 @@ const animate=()=>{
     
     else if(dy !==0 ){
         player.style.backgroundImage=`url(image/Jump__00${index++}.png)`;
-        if(index>0) index=1;
+        // if(index>0) index=1;
     }
     else{
         player.style.backgroundImage=`url(image/Idle__00${index++}.png)`;
@@ -114,26 +115,24 @@ new Obstacle();
 let forward=1;
 let backward=0;
 let won=false;
+let gameOver=false;
 requestAnimationFrame(animate);
-let elements=document.querySelectorAll(".obstacle");
 const playing=function (){
 
     if(((player.offsetLeft+player.offsetWidth)>=innerWidth)&&(backward+1==forward)){
         backward++;
-        new Obstacle();
-        elements=document.querySelectorAll(".obstacle");
+        if(!won) new Obstacle();
 
     }
     else if((player.offsetLeft<=0)&&(backward==forward)){
-        if(backward>=2&&!won){
-            console.log("won");
+        forward++;
+        
+        if(backward>=2&&forward>=3&&!won&&!gameOver){
             won=true;
+            document.querySelector("#wonmsg").classList.add("display");
+            elements.forEach((element)=>{element.remove()})
         }
-        if(!won){
-            forward++;
-            new Obstacle();
-            elements=document.querySelectorAll(".obstacle");
-        }
+        if(!won) new Obstacle();
     }
 
 
@@ -141,10 +140,12 @@ const playing=function (){
     elements.forEach((element)=>{
         if((element.offsetTop>player.offsetTop)&&(element.offsetTop<(player.offsetTop+player.offsetHeight))){
             if((player.offsetLeft<element.offsetLeft)&&((player.offsetLeft+player.offsetWidth)>(element.offsetLeft))||((player.offsetLeft>element.offsetLeft)&&(player.offsetLeft<(element.offsetLeft+element.offsetWidth)))){
-                player.remove();
-                console.log("out");
-                won=false;
-                document.querySelector("#msg").classList.add("display");
+                if(!won){
+                    player.remove();
+                    document.querySelector("#outmsg").classList.add("display");
+                }
+                gameOver=true;
+                
             }
             
         }
