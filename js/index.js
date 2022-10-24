@@ -1,22 +1,53 @@
 const player=document.querySelector("#player");
 const ground=document.querySelector("#ground");
 
+
+player.style.backgroundColor="red";
+
+
 let dx=0;
 let dy=2;
 let position=0;
 let accelaration=0.3;
 let index=1;
 
+const ObstacleWidth=50;
+
+class Obstacle{
+
+    #left=0;
+
+    constructor(){
+        
+        while((this.#left<player.offsetWidth)||(this.#left>(innerWidth-player.offsetLeft-ObstacleWidth)))this.#left=Math.random()*innerWidth;
+        console.log(this.#left>(innerWidth-player.offsetLeft))
+        if(this.#left>=ObstacleWidth){
+            const element=document.createElement("div");
+            element.classList.add("obstacle");
+            element.style.position="absolute";
+            element.style.width="50px";
+            element.style.height="50px";
+            element.style.backgroundColor=`rgb(${256*Math.random()},${256*Math.random()},${256*Math.random()})`
+            element.style.bottom=`${ground.offsetHeight}px`
+            element.style.left=`${this.#left}px`;
+            document.querySelector("body").append(element);
+
+        }
+    }
+}
+
+
+
+
 
 
 addEventListener("keydown",({key})=>{
-    console.log(key);
     if(key==="ArrowRight"){
         player.classList.remove('turn');
-        dx=10;
+        dx=5;
     }else if(key==="ArrowLeft"){
         player.classList.add('turn');
-        dx=-10;
+        dx=-5;
     }
     
 });
@@ -28,6 +59,7 @@ addEventListener("keyup",({key})=>{
         dx=0;
     }
     
+    
 
 })
 
@@ -36,8 +68,10 @@ addEventListener("keypress",({key})=>{
         dy=-10;
         accelaration=0.3;
     }
+    
 
 })
+
 
 const animate=()=>{
 
@@ -80,3 +114,25 @@ const animate=()=>{
 }
 
 requestAnimationFrame(animate);
+new Obstacle();
+const elements=document.querySelectorAll(".obstacle");
+const playing=function (){
+    
+    elements.forEach((element)=>{
+        if((element.offsetTop>player.offsetTop)&&(element.offsetTop<(player.offsetTop+player.offsetHeight))){
+            if((player.offsetLeft<element.offsetLeft)&&((player.offsetLeft+player.offsetWidth)>(element.offsetLeft))||((player.offsetLeft>element.offsetLeft)&&(player.offsetLeft<(element.offsetLeft+element.offsetWidth)))){
+                player.remove();
+                document.querySelector("#msg").classList.add("display");
+            }
+            
+        }
+        
+    })
+
+
+
+    requestAnimationFrame(playing);
+}
+
+
+requestAnimationFrame(playing);

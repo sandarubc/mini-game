@@ -55,4 +55,12 @@ body {
   padding: 10px 5px;
 }
 
+#msg {
+  display: none;
+}
+
+#msg.display {
+  display: block;
+}
+
 /*# sourceMappingURL=style.css.map */
