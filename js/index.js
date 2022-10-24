@@ -110,16 +110,40 @@ const animate=()=>{
     requestAnimationFrame(animate);
     
 }
-
-requestAnimationFrame(animate);
 new Obstacle();
-const elements=document.querySelectorAll(".obstacle");
+let forward=1;
+let backward=0;
+let won=false;
+requestAnimationFrame(animate);
+let elements=document.querySelectorAll(".obstacle");
 const playing=function (){
-    
+
+    if(((player.offsetLeft+player.offsetWidth)>=innerWidth)&&(backward+1==forward)){
+        backward++;
+        new Obstacle();
+        elements=document.querySelectorAll(".obstacle");
+
+    }
+    else if((player.offsetLeft<=0)&&(backward==forward)){
+        if(backward>=2&&!won){
+            console.log("won");
+            won=true;
+        }
+        if(!won){
+            forward++;
+            new Obstacle();
+            elements=document.querySelectorAll(".obstacle");
+        }
+    }
+
+
+
     elements.forEach((element)=>{
         if((element.offsetTop>player.offsetTop)&&(element.offsetTop<(player.offsetTop+player.offsetHeight))){
             if((player.offsetLeft<element.offsetLeft)&&((player.offsetLeft+player.offsetWidth)>(element.offsetLeft))||((player.offsetLeft>element.offsetLeft)&&(player.offsetLeft<(element.offsetLeft+element.offsetWidth)))){
                 player.remove();
+                console.log("out");
+                won=false;
                 document.querySelector("#msg").classList.add("display");
             }
             
