@@ -2,8 +2,6 @@ const player=document.querySelector("#player");
 const ground=document.querySelector("#ground");
 
 
-player.style.backgroundColor="red";
-
 
 let dx=0;
 let dy=2;
@@ -19,13 +17,13 @@ class Obstacle{
 
     constructor(){
         
-        while((this.#left<player.offsetWidth)||(this.#left>(innerWidth-player.offsetLeft-ObstacleWidth)))this.#left=Math.random()*innerWidth;
+        while((this.#left<player.offsetWidth)||(this.#left>(innerWidth-player.offsetWidth-ObstacleWidth)))this.#left=Math.random()*innerWidth;
         console.log(this.#left>(innerWidth-player.offsetLeft))
         if(this.#left>=ObstacleWidth){
             const element=document.createElement("div");
             element.classList.add("obstacle");
             element.style.position="absolute";
-            element.style.width="50px";
+            element.style.width=`${ObstacleWidth}px`;
             element.style.height="50px";
             element.style.backgroundColor=`rgb(${256*Math.random()},${256*Math.random()},${256*Math.random()})`
             element.style.bottom=`${ground.offsetHeight}px`
