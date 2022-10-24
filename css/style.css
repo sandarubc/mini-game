@@ -16,7 +16,9 @@
   body {
     height: 100vh;
     background-image: url(../image/background.jpg);
+    background-repeat: no-repeat;
     overflow: hidden;
+    background-size: contain;
   }
   
   #ground {
