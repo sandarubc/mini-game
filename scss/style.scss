@@ -19,12 +19,13 @@
 
 body{
     height: 100vh;
-    background-image: url("../image/background.jpg");
+    background-image: url(../image/background.jpg);
     overflow: hidden;
+    background-size: contain;
 }
 
 #ground{
-    background-image: url("../image/ground.jpg");
+    background-image: url(../image/ground.jpg);
     background-size: contain;
     background-repeat: repeat-x;
     position:absolute;
