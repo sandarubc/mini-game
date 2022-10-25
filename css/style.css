@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#player {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 64px;
+  height: 84px;
+  position: absolute;
+  top: 0;
+}
+
+body {
+  height: 100vh;
+  background-image: url(../image/background.jpg);
+  overflow: hidden;
+  background-size: contain;
+}
+
+#ground {
+  background-image: url(../image/ground.png);
+  background-size: contain;
+  background-repeat: repeat-x;
+  position: absolute;
+  width: 100vw;
+  height: 150px;
+  bottom: 0;
+}
+
+.turn {
+  transform: rotateY(180deg);
+}
+
+#title {
+  position: absolute;
+  bottom: 5px;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid white;
+  background-color: black;
+}
+#title h1 {
+  padding: 10px;
+  width: fit-content;
+  color: wheat;
+}
+#title span {
+  color: yellow;
+}
+#title div {
+  padding: 10px 5px;
+}
+
+#outmsg {
+  display: none;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 50px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(255, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+#wonmsg {
+  pointer-events: none;
+  display: none;
+  font-size: 50px;
+  font-weight: bold;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 20px 50px;
+  background-color: rgba(55, 255, 0, 0.5);
+  transform: translate(-50%, -50%);
+}
+
+#wonmsg.display {
+  display: block;
+}
+
+#outmsg.display {
+  display: block;
+}
+
+.obstacle {
+  background-image: url(../image/bomb-tnt.png);
+  background-size: contain;
+  border: 1px solid black;
+}
+
+
+/*# sourceMappingURL=style.css.map */

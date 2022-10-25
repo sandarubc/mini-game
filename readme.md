@@ -23,3 +23,9 @@ Battle Field browser based mini game developed by me to enhance my CSS and JavaS
 - Enter following command in terminal and press enter
 
 `git clone https://github.com/sandarubc/mini-game.git`
+
+### Contact
+
+Linkedin @ [Sandaru Akalanka](https://www.linkedin.com/in/sandaru-akalanka-464776188/)
+
+Github @ [Sandarubc](https://github.com/sandarubc)
